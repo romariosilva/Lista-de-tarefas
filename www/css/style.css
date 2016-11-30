@@ -1,0 +1,12 @@
+/* Empty. Add your own CSS if you like */
+ion-pane ion-header-bar button{
+    border-radius: 100% !important; 
+}
+
+ion-footer-bar h4{
+    margin-top: 0px !important;
+}
+
+ion-footer-bar label{
+    margin: -12px 0px !important;
+}

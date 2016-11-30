@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <link rel="manifest" href="manifest.json">
+
+    <!-- un-comment this code to enable service worker
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('service-worker.js')
+          .then(() => console.log('service worker installed'))
+          .catch(err => console.log('Error', err));
+      }
+    </script>-->
+
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <script src="js/TarefaControle.js"></script>
+    <script src="js/app.js"></script>
+  </head>
+  <body ng-app="starter">
+
+    <ion-pane ng-controller="mainController">
+
+        <!--Cabeçalho-->
+      <ion-header-bar class="bar-stable">
+        <button class="button button-small button-assertive button-inline" ng-click="mostrarRemover()">
+         <i class="icon ion-minus-round"></i>
+        </button>
+
+        <h1 class="title">Lista de tarefas</h1>
+
+        <button class="button button-small button-positive button-inline" ng-click="adcionarItem()">
+         <i class="icon ion-plus-round"></i>
+        </button>
+      </ion-header-bar>
+
+      <!--Corpo do app-->
+      <ion-content>
+        <ion-list show-delete="remover">
+          <ion-item ng-repeat="item in lista track by $index" ng-hide="itemEscondido(item)">
+            <div class="row">
+              <div class="col col-90">
+                {{ item.nome }}
+                <!--Botão de excluir-->
+                <ion-delete-button class="ion-minus-circled" ng-click="removerItem(item)"></ion-delete-button>
+                <!--Botão de alterar-->
+                <ion-option-button class="button-positive" ng-click="editarItem(item)">Alterar</ion-option-button>
+              </div>
+              <div class="col col-10">
+                <button class="button button-small button-positive button-outline" ng-click="itemMarcado(item)">
+                  <i class="icon ion-checkmark" ng-show="item.finalizada"></i>
+                </button>
+              </div>
+            </div>
+          </ion-item>
+        </ion-list>
+      </ion-content>
+
+      <!-- Rodapé -->
+      <ion-footer-bar class="bar-calm">
+        <div class="row">
+          <div class="col col-90">
+            <h4>Tarefas finalidas</h4>
+          </div>
+          <div class="col col-10">
+            <label class="toggle">
+              <input type="checkbox" ng-model="marcado">
+              <div class="track">
+                <div class="handle">
+
+                </div>
+              </div>
+            </label>
+          </div>
+        </div>
+      </ion-footer-bar>
+    </ion-pane>
+  </body>
+</html>
